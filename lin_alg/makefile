@@ -1,13 +1,13 @@
 
 CXX = g++
-CXXFLAGS = -Wall -std=c++17 -O2
+CXXFLAGS = -Wall -std=c++17 -O3
 
-TARGETS = algebra.x
+TARGETS = run.x
 OBJECTS = main.o
 
 all: $(TARGETS)
 
-algebra.x: $(OBJECTS)
+run.x: $(OBJECTS)
 	$(CXX) $^ -o $@
 
 main.o: *.hpp main.cpp
@@ -17,8 +17,8 @@ clean:
 
 recompile: clean all
 
-run: algebra.x
+run: run.x
 	./$^
 
-valrun: algebra.x
-	valgrind -s --track-origins=yes ./algebra.x
+valrun: run.x
+	valgrind -s --track-origins=yes ./run.x

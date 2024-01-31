@@ -3,7 +3,7 @@
 
 #include <chrono>
 
-#include "core.hpp"
+#include "matrix.hpp"
 
 template <typename T>
 matrix<T> matrix<T>::operator+(T scalar) const
@@ -164,28 +164,6 @@ matrix<T> matrix<T>::operator*(const matrix<T> &other) const
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> duration = end - start;
 	std::cout << "row x col time: " << duration.count() << " s" << std::endl;
-
-	return prod;
-}
-
-template <typename T>
-matrix<T> matrix<T>::dot_product(const matrix<T> &other) const
-{
-	size_t cols = other.get_cols();
-	matrix<T> prod(m_rows, cols);
-
-	auto start = std::chrono::high_resolution_clock::now();
-	for (size_t i = 0; i < m_rows; i++)
-	{
-		for (size_t j = 0; j < cols; j++)
-		{
-			for (size_t k = 0; k < m_cols; k++)
-				prod(j, i) += m_matrix[j][k] * other(k, i);
-		}
-	}
-	auto end = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> duration = end - start;
-	std::cout << "col x row time: " << duration.count() << " s" << std::endl;
 
 	return prod;
 }
