@@ -42,7 +42,7 @@ matrix<T> matrix<T>::identity(size_t rows)
 }
 
 template <typename T>
-matrix<T> matrix<T>::real_rand(size_t rows, size_t cols, T min, T max)
+matrix<T> matrix<T>::rand_real(size_t rows, size_t cols, T min, T max)
 {
 	matrix<T> m(rows, cols);
 	std::default_random_engine engine;
@@ -59,7 +59,7 @@ matrix<T> matrix<T>::real_rand(size_t rows, size_t cols, T min, T max)
 }
 
 template <typename T>
-matrix<T> matrix<T>::int_rand(size_t rows, size_t cols, T min, T max)
+matrix<T> matrix<T>::rand_int(size_t rows, size_t cols, T min, T max)
 {
 	matrix<T> m(rows, cols);
 	std::default_random_engine engine;

@@ -26,8 +26,8 @@ public:
 	static matrix zeros(size_t rows, size_t cols);
 	static matrix ones(size_t rows, size_t cols);
 	static matrix identity(size_t rows);
-	static matrix real_rand(size_t rows, size_t cols, T min, T max);
-	static matrix int_rand(size_t rows, size_t cols, T min, T max);
+	static matrix rand_real(size_t rows, size_t cols, T min, T max);
+	static matrix rand_int(size_t rows, size_t cols, T min, T max);
 
 	// operazioni scalari
 	matrix operator+(T scalar) const;
