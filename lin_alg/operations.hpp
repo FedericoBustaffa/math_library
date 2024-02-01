@@ -21,8 +21,8 @@ matrix<T> matrix<T>::operator+(T scalar) const
 template <typename T>
 matrix<T> operator+(T scalar, const matrix<T> &m)
 {
-	size_t rows = m.get_rows();
-	size_t cols = m.get_cols();
+	size_t rows = m.rows();
+	size_t cols = m.cols();
 	matrix<T> r(rows, cols);
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -49,8 +49,8 @@ matrix<T> matrix<T>::operator-(T scalar) const
 template <typename T>
 matrix<T> operator-(T scalar, const matrix<T> &m)
 {
-	size_t rows = m.get_rows();
-	size_t cols = m.get_cols();
+	size_t rows = m.rows();
+	size_t cols = m.cols();
 	matrix<T> r(rows, cols);
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -77,8 +77,8 @@ matrix<T> matrix<T>::operator*(T scalar) const
 template <typename T>
 matrix<T> operator*(T scalar, const matrix<T> &m)
 {
-	size_t rows = m.get_rows();
-	size_t cols = m.get_cols();
+	size_t rows = m.rows();
+	size_t cols = m.cols();
 	matrix<T> r(rows, cols);
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -105,8 +105,8 @@ matrix<T> matrix<T>::operator/(T scalar) const
 template <typename T>
 matrix<T> operator/(T scalar, const matrix<T> &m)
 {
-	size_t rows = m.get_rows();
-	size_t cols = m.get_cols();
+	size_t rows = m.rows();
+	size_t cols = m.cols();
 	matrix<T> r(rows, cols);
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -149,7 +149,7 @@ matrix<T> matrix<T>::operator-(const matrix<T> &other) const
 template <typename T>
 matrix<T> matrix<T>::operator*(const matrix<T> &other) const
 {
-	size_t cols = other.get_cols();
+	size_t cols = other.cols();
 	matrix<T> prod(m_rows, cols);
 
 	auto start = std::chrono::high_resolution_clock::now();

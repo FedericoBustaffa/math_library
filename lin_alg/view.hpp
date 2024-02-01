@@ -8,9 +8,9 @@
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const matrix<T> &m)
 {
-	for (size_t i = 0; i < m.get_rows(); i++)
+	for (size_t i = 0; i < m.rows(); i++)
 	{
-		for (size_t j = 0; j < m.get_cols(); j++)
+		for (size_t j = 0; j < m.cols(); j++)
 		{
 			os.width(10);
 			os << std::left << m(i, j) << " " << std::flush;

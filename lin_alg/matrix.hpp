@@ -13,8 +13,8 @@ public:
 	void operator=(const matrix &other);
 
 	// utility
-	inline size_t get_rows() const { return m_rows; };
-	inline size_t get_cols() const { return m_cols; };
+	inline size_t rows() const { return m_rows; };
+	inline size_t cols() const { return m_cols; };
 	inline size_t size() const { return m_rows * m_cols; };
 	inline std::pair<size_t, size_t> shape() const { return std::pair<size_t, size_t>(m_rows, m_cols); };
 
@@ -68,7 +68,7 @@ matrix<T>::matrix(size_t rows, size_t cols)
 
 template <typename T>
 matrix<T>::matrix(const matrix<T> &other)
-	: m_rows(other.get_rows()), m_cols(other.get_cols())
+	: m_rows(other.rows()), m_cols(other.cols())
 {
 	m_matrix = new T *[m_rows];
 	for (size_t i = 0; i < m_rows; i++)
@@ -82,8 +82,8 @@ matrix<T>::matrix(const matrix<T> &other)
 template <typename T>
 void matrix<T>::operator=(const matrix<T> &other)
 {
-	m_rows = other.get_rows();
-	m_cols = other.get_cols();
+	m_rows = other.rows();
+	m_cols = other.cols();
 	for (size_t i = 0; i < m_rows; i++)
 	{
 		for (size_t j = 0; j < m_cols; j++)
