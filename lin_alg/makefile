@@ -1,6 +1,6 @@
 
 CXX = g++
-CXXFLAGS = -Wall -std=c++17 -O3
+CXXFLAGS = -Wall -std=c++17 -O3 -ftree-vectorize -march=native
 
 TARGETS = run.x
 OBJECTS = main.o

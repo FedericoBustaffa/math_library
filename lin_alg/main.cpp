@@ -1,6 +1,6 @@
 #include "lin_alg.hpp"
 
-#define dim 1024
+#define dim 2048
 
 int main(int argc, const char **argv)
 {
