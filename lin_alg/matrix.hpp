@@ -41,6 +41,8 @@ public:
 
 	matrix operator*(const matrix &other) const;
 	matrix prod(const matrix &other) const;
+	matrix otherprod(const matrix &other) const;
+	matrix yetanotherprod(const matrix &other) const;
 
 	// trasposizione
 	matrix transpose() const;

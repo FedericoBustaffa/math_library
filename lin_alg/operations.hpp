@@ -162,7 +162,7 @@ matrix<T> matrix<T>::operator*(const matrix<T> &other) const
 	}
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> duration = end - start;
-	std::cout << "col x row time: " << duration.count() << " s" << std::endl;
+	std::cout << "row x elem x col time: " << duration.count() << " s" << std::endl;
 
 	return prod;
 }
@@ -184,7 +184,52 @@ matrix<T> matrix<T>::prod(const matrix<T> &other) const
 	}
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> duration = end - start;
-	std::cout << "row x col time: " << duration.count() << " s" << std::endl;
+	std::cout << "row x col x elem time: " << duration.count() << " s" << std::endl;
+
+	return prod;
+}
+
+template <typename T>
+matrix<T> matrix<T>::otherprod(const matrix<T> &other) const
+{
+	size_t cols = other.cols();
+	matrix<T> prod(m_rows, cols);
+
+	auto start = std::chrono::high_resolution_clock::now();
+	auto another = other.transpose();
+	for (size_t i = 0; i < m_rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+		{
+			for (size_t k = 0; k < m_cols; k++)
+				prod(i, j) += m_matrix[i][k] * another.m_matrix[j][k];
+		}
+	}
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> duration = end - start;
+	std::cout << "row x col x elem (with transpose) time: " << duration.count() << " s" << std::endl;
+
+	return prod;
+}
+
+template <typename T>
+matrix<T> matrix<T>::yetanotherprod(const matrix<T> &other) const
+{
+	size_t cols = other.cols();
+	matrix<T> prod(m_rows, cols);
+
+	auto start = std::chrono::high_resolution_clock::now();
+	for (size_t j = 0; j < cols; j++)
+	{
+		for (size_t i = 0; i < m_rows; i++)
+		{
+			for (size_t k = 0; k < m_cols; k++)
+				prod(i, j) += m_matrix[i][k] * other(k, j);
+		}
+	}
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> duration = end - start;
+	std::cout << "col x row x elem time: " << duration.count() << " s" << std::endl;
 
 	return prod;
 }
@@ -196,7 +241,7 @@ matrix<T> matrix<T>::transpose() const
 	for (size_t i = 0; i < m_rows; i++)
 	{
 		for (size_t j = 0; j < m_cols; j++)
-			t(j, i) = m_matrix[i][j];
+			t.m_matrix[i][j] = m_matrix[i][j];
 	}
 
 	return t;

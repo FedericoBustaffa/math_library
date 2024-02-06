@@ -1,22 +1,43 @@
 #include <iostream>
+#include <cmath>
+#include <string>
 
 #include "lin_alg.hpp"
 
-#define dim 2048
+using elem_type = int;
 
 int main(int argc, const char **argv)
 {
-    matrix<int> a = matrix<int>::rand_int(dim, dim, 0, 5);
-    matrix<int> b = matrix<int>::rand_int(dim, dim, 0, 5);
+    unsigned Ntrials = 5;
+    size_t * dims = new size_t[6];
+    for (unsigned i = 0; i < Ntrials; ++i){
+        dims[i] = std::pow(2,i+7);
+    }
 
-    // std::cout << a << std::endl;
-    // std::cout << b << std::endl;
+    for (unsigned i = 0; i < Ntrials; ++i){
 
-    matrix<int> c = a * b;
-    // std::cout << c << std::endl;
+        std::cout << std::endl << "With dim=" + std::to_string(dims[i]) + "x" + std::to_string(dims[i]) << std::endl;
 
-    c = a.prod(b);
-    // std::cout << c << std::endl;
+        matrix<elem_type> a = matrix<elem_type>::rand_int(dims[i], dims[i], 0, 5);
+        matrix<elem_type> b = matrix<elem_type>::rand_int(dims[i], dims[i], 0, 5);
+
+        // std::cout << a << std::endl;
+        // std::cout << b << std::endl;
+
+        matrix<elem_type> c(dims[i], dims[i]);
+
+        c = a.prod(b);
+        // std::cout << c << std::endl;
+
+        c = a.yetanotherprod(b);
+        // std::cout << c << std::endl;
+
+        c = a.otherprod(b);
+        // std::cout << c << std::endl;
+
+        c = a * b;
+        // std::cout << c << std::endl;
+    }
 
     return 0;
 }
