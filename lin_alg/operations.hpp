@@ -145,9 +145,30 @@ matrix<T> matrix<T>::operator-(const matrix<T> &other) const
 	return res;
 }
 
-// prodotto riga per colonna
 template <typename T>
 matrix<T> matrix<T>::operator*(const matrix<T> &other) const
+{
+	size_t cols = other.cols();
+	matrix<T> prod(m_rows, cols);
+
+	auto start = std::chrono::high_resolution_clock::now();
+	for (size_t i = 0; i < m_rows; i++)
+	{
+		for (size_t k = 0; k < m_cols; k++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				prod(i, j) += m_matrix[i][k] * other(k, j);
+		}
+	}
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> duration = end - start;
+	std::cout << "col x row time: " << duration.count() << " s" << std::endl;
+
+	return prod;
+}
+
+template <typename T>
+matrix<T> matrix<T>::prod(const matrix<T> &other) const
 {
 	size_t cols = other.cols();
 	matrix<T> prod(m_rows, cols);

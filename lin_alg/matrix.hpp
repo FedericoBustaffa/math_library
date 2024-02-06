@@ -39,8 +39,8 @@ public:
 	matrix operator+(const matrix &other) const;
 	matrix operator-(const matrix &other) const;
 
-	// prodotto riga per colonna
 	matrix operator*(const matrix &other) const;
+	matrix prod(const matrix &other) const;
 
 	// trasposizione
 	matrix transpose() const;
