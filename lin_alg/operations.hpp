@@ -8,8 +8,8 @@
 
 template <typename T> matrix<T> matrix<T>::operator+(T scalar) const {
   matrix<T> res(m_rows, m_cols);
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < m_cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < m_cols; ++j)
       res(i, j) = m_matrix[i][j] + scalar;
   }
 
@@ -20,8 +20,8 @@ template <typename T> matrix<T> operator+(T scalar, const matrix<T> &m) {
   size_t rows = m.rows();
   size_t cols = m.cols();
   matrix<T> r(rows, cols);
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols; j++)
+  for (size_t i = 0; i < rows; ++i) {
+    for (size_t j = 0; j < cols; ++j)
       r(i, j) = m(i, j) + scalar;
   }
 
@@ -30,8 +30,8 @@ template <typename T> matrix<T> operator+(T scalar, const matrix<T> &m) {
 
 template <typename T> matrix<T> matrix<T>::operator-(T scalar) const {
   matrix<T> res(m_rows, m_cols);
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < m_cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < m_cols; ++j)
       res(i, j) = m_matrix[i][j] - scalar;
   }
 
@@ -42,8 +42,8 @@ template <typename T> matrix<T> operator-(T scalar, const matrix<T> &m) {
   size_t rows = m.rows();
   size_t cols = m.cols();
   matrix<T> r(rows, cols);
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols; j++)
+  for (size_t i = 0; i < rows; ++i) {
+    for (size_t j = 0; j < cols; ++j)
       r(i, j) = m(i, j) - scalar;
   }
 
@@ -52,8 +52,8 @@ template <typename T> matrix<T> operator-(T scalar, const matrix<T> &m) {
 
 template <typename T> matrix<T> matrix<T>::operator*(T scalar) const {
   matrix<T> res(m_rows, m_cols);
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < m_cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < m_cols; ++j)
       res(i, j) = m_matrix[i][j] * scalar;
   }
 
@@ -64,8 +64,8 @@ template <typename T> matrix<T> operator*(T scalar, const matrix<T> &m) {
   size_t rows = m.rows();
   size_t cols = m.cols();
   matrix<T> r(rows, cols);
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols; j++)
+  for (size_t i = 0; i < rows; ++i) {
+    for (size_t j = 0; j < cols; ++j)
       r(i, j) = m(i, j) * scalar;
   }
 
@@ -74,8 +74,8 @@ template <typename T> matrix<T> operator*(T scalar, const matrix<T> &m) {
 
 template <typename T> matrix<T> matrix<T>::operator/(T scalar) const {
   matrix<T> res(m_rows, m_cols);
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < m_cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < m_cols; ++j)
       res(i, j) = m_matrix[i][j] / scalar;
   }
 
@@ -86,8 +86,8 @@ template <typename T> matrix<T> operator/(T scalar, const matrix<T> &m) {
   size_t rows = m.rows();
   size_t cols = m.cols();
   matrix<T> r(rows, cols);
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols; j++)
+  for (size_t i = 0; i < rows; ++i) {
+    for (size_t j = 0; j < cols; ++j)
       r(i, j) = m(i, j) / scalar;
   }
 
@@ -98,8 +98,8 @@ template <typename T> matrix<T> operator/(T scalar, const matrix<T> &m) {
 template <typename T>
 matrix<T> matrix<T>::operator+(const matrix<T> &other) const {
   matrix<T> res(m_rows, m_cols);
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < m_cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < m_cols; ++j)
       res(i, j) = m_matrix[i][j] + other(i, j);
   }
 
@@ -110,8 +110,8 @@ matrix<T> matrix<T>::operator+(const matrix<T> &other) const {
 template <typename T>
 matrix<T> matrix<T>::operator-(const matrix<T> &other) const {
   matrix<T> res(m_rows, m_cols);
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < m_cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < m_cols; ++j)
       res(i, j) = m_matrix[i][j] - other(i, j);
   }
 
@@ -124,9 +124,9 @@ matrix<T> matrix<T>::operator*(const matrix<T> &other) const {
   matrix<T> prod(m_rows, cols);
 
   auto start = std::chrono::high_resolution_clock::now();
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t k = 0; k < m_cols; k++) {
-      for (size_t j = 0; j < cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t k = 0; k < m_cols; ++k) {
+      for (size_t j = 0; j < cols; ++j)
         prod(i, j) += m_matrix[i][k] * other(k, j);
     }
   }
@@ -143,9 +143,9 @@ template <typename T> matrix<T> matrix<T>::prod(const matrix<T> &other) const {
   matrix<T> prod(m_rows, cols);
 
   auto start = std::chrono::high_resolution_clock::now();
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < cols; j++) {
-      for (size_t k = 0; k < m_cols; k++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < cols; ++j) {
+      for (size_t k = 0; k < m_cols; ++k)
         prod(i, j) += m_matrix[i][k] * other(k, j);
     }
   }
@@ -164,9 +164,9 @@ matrix<T> matrix<T>::otherprod(const matrix<T> &other) const {
 
   auto start = std::chrono::high_resolution_clock::now();
   auto another = other.transpose();
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < cols; j++) {
-      for (size_t k = 0; k < m_cols; k++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < cols; ++j) {
+      for (size_t k = 0; k < m_cols; ++k)
         prod(i, j) += m_matrix[i][k] * another.m_matrix[j][k];
     }
   }
@@ -184,9 +184,9 @@ matrix<T> matrix<T>::yetanotherprod(const matrix<T> &other) const {
   matrix<T> prod(m_rows, cols);
 
   auto start = std::chrono::high_resolution_clock::now();
-  for (size_t j = 0; j < cols; j++) {
-    for (size_t i = 0; i < m_rows; i++) {
-      for (size_t k = 0; k < m_cols; k++)
+  for (size_t j = 0; j < cols; ++j) {
+    for (size_t i = 0; i < m_rows; ++i) {
+      for (size_t k = 0; k < m_cols; ++k)
         prod(i, j) += m_matrix[i][k] * other(k, j);
     }
   }
@@ -200,8 +200,8 @@ matrix<T> matrix<T>::yetanotherprod(const matrix<T> &other) const {
 
 template <typename T> matrix<T> matrix<T>::transpose() const {
   matrix<T> t(m_cols, m_rows);
-  for (size_t i = 0; i < m_rows; i++) {
-    for (size_t j = 0; j < m_cols; j++)
+  for (size_t i = 0; i < m_rows; ++i) {
+    for (size_t j = 0; j < m_cols; ++j)
       t.m_matrix[i][j] = m_matrix[i][j];
   }
 
