@@ -6,4 +6,4 @@
 #include "./operations.hpp"
 #include "./view.hpp"
 
-#endif // !LIN_ALG_HPP
+#endif
