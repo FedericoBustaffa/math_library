@@ -33,12 +33,6 @@ public:
     static matrix rand_real(size_t rows, size_t cols, T min, T max);
     static matrix rand_int(size_t rows, size_t cols, T min, T max);
 
-    // operazioni con scalari
-    matrix operator+(T scalar) const;
-    matrix operator-(T scalar) const;
-    matrix operator*(T scalar) const;
-    matrix operator/(T scalar) const;
-
     // operazioni tra matrici
     matrix operator+(const matrix &other) const;
     matrix operator-(const matrix &other) const;

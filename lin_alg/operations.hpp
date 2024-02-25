@@ -7,13 +7,13 @@
 #include "matrix.hpp"
 
 template <typename T>
-matrix<T> matrix<T>::operator+(T scalar) const
+matrix<T> operator+(const matrix<T> &m, T scalar)
 {
-    matrix<T> res(m_rows, m_cols);
-    for (size_t i = 0; i < m_rows; ++i)
+    matrix<T> res(m.rows(), m.cols());
+    for (size_t i = 0; i < m.rows(); ++i)
     {
-        for (size_t j = 0; j < m_cols; ++j)
-            res(i, j) = m_matrix[i][j] + scalar;
+        for (size_t j = 0; j < m.cols(); ++j)
+            res(i, j) = m(i, j) + scalar;
     }
 
     return res;
@@ -35,13 +35,13 @@ matrix<T> operator+(T scalar, const matrix<T> &m)
 }
 
 template <typename T>
-matrix<T> matrix<T>::operator-(T scalar) const
+matrix<T> operator-(const matrix<T> &m, T scalar)
 {
-    matrix<T> res(m_rows, m_cols);
-    for (size_t i = 0; i < m_rows; ++i)
+    matrix<T> res(m.rows(), m.cols());
+    for (size_t i = 0; i < m.rows(); ++i)
     {
-        for (size_t j = 0; j < m_cols; ++j)
-            res(i, j) = m_matrix[i][j] - scalar;
+        for (size_t j = 0; j < m.cols(); ++j)
+            res(i, j) = m(i, j) - scalar;
     }
 
     return res;
@@ -63,13 +63,13 @@ matrix<T> operator-(T scalar, const matrix<T> &m)
 }
 
 template <typename T>
-matrix<T> matrix<T>::operator*(T scalar) const
+matrix<T> operator*(const matrix<T> &m, T scalar)
 {
-    matrix<T> res(m_rows, m_cols);
-    for (size_t i = 0; i < m_rows; ++i)
+    matrix<T> res(m.rows(), m.cols());
+    for (size_t i = 0; i < m.rows(); ++i)
     {
-        for (size_t j = 0; j < m_cols; ++j)
-            res(i, j) = m_matrix[i][j] * scalar;
+        for (size_t j = 0; j < m.cols(); ++j)
+            res(i, j) = m(i, j) * scalar;
     }
 
     return res;
@@ -91,13 +91,13 @@ matrix<T> operator*(T scalar, const matrix<T> &m)
 }
 
 template <typename T>
-matrix<T> matrix<T>::operator/(T scalar) const
+matrix<T> operator/(const matrix<T> &m, T scalar)
 {
-    matrix<T> res(m_rows, m_cols);
-    for (size_t i = 0; i < m_rows; ++i)
+    matrix<T> res(m.rows(), m.cols());
+    for (size_t i = 0; i < m.rows(); ++i)
     {
-        for (size_t j = 0; j < m_cols; ++j)
-            res(i, j) = m_matrix[i][j] / scalar;
+        for (size_t j = 0; j < m.cols(); ++j)
+            res(i, j) = m(i, j) / scalar;
     }
 
     return res;
