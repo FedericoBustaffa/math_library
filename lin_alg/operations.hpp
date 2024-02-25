@@ -4,7 +4,7 @@
 #include <chrono>
 #include <iostream>
 
-#include "./matrix.hpp"
+#include "matrix.hpp"
 
 template <typename T>
 matrix<T> matrix<T>::operator+(T scalar) const

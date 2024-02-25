@@ -3,7 +3,7 @@
 
 #include <random>
 
-#include "./matrix.hpp"
+#include "matrix.hpp"
 
 template <typename T>
 matrix<T> matrix<T>::zeros(size_t rows, size_t cols)

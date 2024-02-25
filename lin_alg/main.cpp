@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "./lin_alg.hpp"
+#include "lin_alg.hpp"
 
 using elem_type = uint32_t;
 
@@ -18,7 +18,9 @@ int main(int argc, const char **argv)
     for (unsigned i = 0; i < Ntrials; ++i)
     {
         std::cout << std::endl
-                  << "With dim=" + std::to_string(dims[i]) + "x" + std::to_string(dims[i]) << std::endl;
+                  << "With dim=" + std::to_string(dims[i]) + "x" +
+                         std::to_string(dims[i])
+                  << std::endl;
 
         matrix<elem_type> a = matrix<elem_type>::rand_int(dims[i], dims[i], 0, 5);
         matrix<elem_type> b = matrix<elem_type>::rand_int(dims[i], dims[i], 0, 5);

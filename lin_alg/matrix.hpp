@@ -16,6 +16,7 @@ public:
     inline size_t rows() const { return m_rows; }
     inline size_t cols() const { return m_cols; }
     inline size_t size() const { return m_rows * m_cols; }
+
     inline std::pair<size_t, size_t> shape() const
     {
         return std::pair<size_t, size_t>(m_rows, m_cols);
@@ -60,7 +61,8 @@ private:
 };
 
 template <typename T>
-matrix<T>::matrix(size_t rows, size_t cols) : m_rows(rows), m_cols(cols)
+matrix<T>::matrix(size_t rows, size_t cols)
+    : m_rows(rows), m_cols(cols)
 {
     m_matrix = new T *[rows];
     for (size_t i = 0; i < rows; i++)
