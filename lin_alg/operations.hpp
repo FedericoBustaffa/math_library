@@ -175,8 +175,8 @@ matrix<T> prod(const matrix<T> &a, const matrix<T> &b)
     size_t cols = b.cols();
     matrix<T> prod(a.rows(), cols);
 
-    auto start = std::chrono::high_resolution_clock::now();
     auto another = b.transpose();
+    auto start = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < a.rows(); ++i)
     {
         for (size_t j = 0; j < cols; ++j)
@@ -200,7 +200,7 @@ matrix<T> matrix<T>::transpose() const
     for (size_t i = 0; i < m_rows; ++i)
     {
         for (size_t j = 0; j < m_cols; ++j)
-            t.m_matrix[i][j] = m_matrix[i][j];
+            t.m_matrix[j][i] = m_matrix[i][j];
     }
 
     return t;
