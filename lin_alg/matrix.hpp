@@ -9,6 +9,7 @@ class matrix
 {
 public:
     matrix(size_t rows, size_t cols);
+    matrix(size_t dim);
     matrix(const matrix &other);
     void operator=(const matrix &other);
 
@@ -33,17 +34,7 @@ public:
     static matrix rand_real(size_t rows, size_t cols, T min, T max);
     static matrix rand_int(size_t rows, size_t cols, T min, T max);
 
-    // operazioni tra matrici
-    matrix operator+(const matrix &other) const;
-    matrix operator-(const matrix &other) const;
-
-    // prodotto tra matrici
-    matrix operator*(const matrix &other) const;
-    matrix prod(const matrix &other) const;
-    matrix otherprod(const matrix &other) const;
-    matrix yetanotherprod(const matrix &other) const;
-
-    // trasposizione
+    // trasposta
     matrix transpose() const;
 
     ~matrix();
@@ -59,10 +50,23 @@ matrix<T>::matrix(size_t rows, size_t cols)
     : m_rows(rows), m_cols(cols)
 {
     m_matrix = new T *[rows];
-    for (size_t i = 0; i < rows; i++)
+    for (size_t i = 0; i < rows; ++i)
     {
         m_matrix[i] = new T[cols];
-        for (size_t j = 0; j < m_cols; j++)
+        for (size_t j = 0; j < m_cols; ++j)
+            m_matrix[i][j] = 0;
+    }
+}
+
+template <typename T>
+matrix<T>::matrix(size_t dim)
+    : m_rows(dim), m_cols(dim)
+{
+    m_matrix = new T *[dim];
+    for (size_t i = 0; i < dim; ++i)
+    {
+        m_matrix[i] = new T[dim];
+        for (size_t j = 0; j < dim; ++j)
             m_matrix[i][j] = 0;
     }
 }
@@ -72,10 +76,10 @@ matrix<T>::matrix(const matrix<T> &other)
     : m_rows(other.rows()), m_cols(other.cols())
 {
     m_matrix = new T *[m_rows];
-    for (size_t i = 0; i < m_rows; i++)
+    for (size_t i = 0; i < m_rows; ++i)
     {
         m_matrix[i] = new T[m_cols];
-        for (size_t j = 0; j < m_cols; j++)
+        for (size_t j = 0; j < m_cols; ++j)
             m_matrix[i][j] = other(i, j);
     }
 }
@@ -85,9 +89,9 @@ void matrix<T>::operator=(const matrix<T> &other)
 {
     m_rows = other.rows();
     m_cols = other.cols();
-    for (size_t i = 0; i < m_rows; i++)
+    for (size_t i = 0; i < m_rows; ++i)
     {
-        for (size_t j = 0; j < m_cols; j++)
+        for (size_t j = 0; j < m_cols; ++j)
             m_matrix[i][j] = other(i, j);
     }
 }
