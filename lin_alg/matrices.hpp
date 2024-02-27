@@ -45,8 +45,6 @@ template <typename T>
 matrix<T> matrix<T>::rand_real(size_t rows, size_t cols, T min, T max)
 {
     matrix<T> m(rows, cols);
-    std::default_random_engine engine;
-    engine.seed(time(nullptr));
     std::uniform_real_distribution<T> dist(min, max);
 
     for (size_t i = 0; i < rows; ++i)
@@ -59,11 +57,15 @@ matrix<T> matrix<T>::rand_real(size_t rows, size_t cols, T min, T max)
 }
 
 template <typename T>
+matrix<T> matrix<T>::rand_real(size_t dim, T min, T max)
+{
+    return rand_real(dim, dim, min, max);
+}
+
+template <typename T>
 matrix<T> matrix<T>::rand_int(size_t rows, size_t cols, T min, T max)
 {
     matrix<T> m(rows, cols);
-    std::default_random_engine engine;
-    engine.seed(time(nullptr));
     std::uniform_int_distribution<T> dist(min, max);
 
     for (size_t i = 0; i < rows; ++i)
@@ -73,6 +75,12 @@ matrix<T> matrix<T>::rand_int(size_t rows, size_t cols, T min, T max)
     }
 
     return m;
+}
+
+template <typename T>
+matrix<T> matrix<T>::rand_int(size_t dim, T min, T max)
+{
+    return rand_int(dim, dim, min, max);
 }
 
 template <typename T>
