@@ -2,6 +2,7 @@
 #define MATRICES_HPP
 
 #include <random>
+#include <type_traits>
 
 #include "matrix.hpp"
 
@@ -42,45 +43,36 @@ matrix<T> matrix<T>::identity(size_t rows)
 }
 
 template <typename T>
-matrix<T> matrix<T>::rand_real(size_t rows, size_t cols, T min, T max)
+matrix<T> matrix<T>::rand(std::default_random_engine &engine, size_t rows, size_t cols, T min, T max)
 {
     matrix<T> m(rows, cols);
-    std::uniform_real_distribution<T> dist(min, max);
 
-    for (size_t i = 0; i < rows; ++i)
+    if constexpr (std::is_integral<T>::value)
     {
-        for (size_t j = 0; j < cols; ++j)
-            m(i, j) = dist(engine);
+        std::uniform_int_distribution<T> dist(min, max);
+        for (size_t i = 0; i < rows; ++i)
+        {
+            for (size_t j = 0; j < cols; ++j)
+                m(i, j) = dist(engine);
+        }
+    }
+    else
+    {
+        std::uniform_real_distribution<T> dist(min, max);
+        for (size_t i = 0; i < rows; ++i)
+        {
+            for (size_t j = 0; j < cols; ++j)
+                m(i, j) = dist(engine);
+        }
     }
 
     return m;
 }
 
 template <typename T>
-matrix<T> matrix<T>::rand_real(size_t dim, T min, T max)
+matrix<T> matrix<T>::rand(std::default_random_engine &engine, size_t dim, T min, T max)
 {
-    return rand_real(dim, dim, min, max);
-}
-
-template <typename T>
-matrix<T> matrix<T>::rand_int(size_t rows, size_t cols, T min, T max)
-{
-    matrix<T> m(rows, cols);
-    std::uniform_int_distribution<T> dist(min, max);
-
-    for (size_t i = 0; i < rows; ++i)
-    {
-        for (size_t j = 0; j < cols; ++j)
-            m(i, j) = dist(engine);
-    }
-
-    return m;
-}
-
-template <typename T>
-matrix<T> matrix<T>::rand_int(size_t dim, T min, T max)
-{
-    return rand_int(dim, dim, min, max);
+    return matrix<T>::rand(engine, dim, dim, min, max);
 }
 
 template <typename T>

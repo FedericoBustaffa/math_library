@@ -32,10 +32,8 @@ public:
     static matrix zeros(size_t rows, size_t cols);
     static matrix ones(size_t rows, size_t cols);
     static matrix identity(size_t rows);
-    static matrix rand_real(size_t rows, size_t cols, T min, T max);
-    static matrix rand_real(size_t dim, T min, T max);
-    static matrix rand_int(size_t rows, size_t cols, T min, T max);
-    static matrix rand_int(size_t dim, T min, T max);
+    static matrix rand(std::default_random_engine &engine, size_t rows, size_t cols, T min, T max);
+    static matrix rand(std::default_random_engine &engine, size_t dim, T min, T max);
 
     // trasposta
     matrix transpose() const;
@@ -43,16 +41,10 @@ public:
     ~matrix();
 
 private:
-    static std::default_random_engine engine;
-
-private:
     size_t m_rows;
     size_t m_cols;
     T **m_matrix;
 };
-
-template <typename T>
-std::default_random_engine matrix<T>::engine(time(nullptr));
 
 template <typename T>
 matrix<T>::matrix(size_t rows, size_t cols)
