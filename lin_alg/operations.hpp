@@ -163,8 +163,7 @@ matrix<T> operator*(const matrix<T> &a, const matrix<T> &b)
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
-    std::cout << "row x elem x col time: " << duration.count() << " s"
-              << std::endl;
+    std::cout << "row x elem x col time: " << duration.count() << " s" << std::endl;
 
     return prod;
 }
@@ -187,8 +186,8 @@ matrix<T> prod(const matrix<T> &a, const matrix<T> &b)
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
-    std::cout << "row x col x elem (with transpose) time: " << duration.count()
-              << " s" << std::endl;
+    std::cout << "row x col x elem (with transpose) time: " << duration.count() << " s"
+              << std::endl;
 
     return prod;
 }
