@@ -1,6 +1,6 @@
 #include <iostream>
-#include <string>
 #include <random>
+#include <string>
 
 #include "lin_alg.hpp"
 
@@ -8,8 +8,7 @@
 
 using elem_type = uint32_t;
 
-int main(int argc, const char **argv)
-{
+int main(int argc, const char** argv) {
     std::default_random_engine engine(time(nullptr));
 
     matrix<int> a = matrix<int>::rand(engine, dim, 0, 5);
