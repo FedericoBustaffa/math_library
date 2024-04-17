@@ -13,7 +13,7 @@ int main(int argc, const char** argv)
 
     matrix<int> a = matrix<int>::rand(engine, dim, 0, 5);
     matrix<int> b = matrix<int>::rand(engine, dim, 0, 10);
-    matrix<int> c = a * b;
+    matrix<int> c = prod(a, b);
 
     return 0;
 }

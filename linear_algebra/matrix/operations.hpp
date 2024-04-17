@@ -146,8 +146,37 @@ matrix<T> operator-(const matrix<T> &a, const matrix<T> &b)
     return res;
 }
 
+// prodotto elemento per elemento
 template <typename T>
 matrix<T> operator*(const matrix<T> &a, const matrix<T> &b)
+{
+    matrix<T> res(a.rows(), a.cols());
+    for (size_t i = 0; i < a.rows(); ++i)
+    {
+        for (size_t j = 0; j < a.cols(); ++j)
+            res(i, j) = a(i, j) * b(i, j);
+    }
+
+    return res;
+}
+
+// differenza elemento per elemento
+template <typename T>
+matrix<T> operator/(const matrix<T> &a, const matrix<T> &b)
+{
+    matrix<T> res(a.rows(), a.cols());
+    for (size_t i = 0; i < a.rows(); ++i)
+    {
+        for (size_t j = 0; j < a.cols(); ++j)
+            res(i, j) = a(i, j) / b(i, j);
+    }
+
+    return res;
+}
+
+// prodotto riga per colonna
+template <typename T>
+matrix<T> prod(const matrix<T> &a, const matrix<T> &b)
 {
     size_t cols = b.cols();
     matrix<T> prod(a.rows(), cols);
@@ -168,8 +197,9 @@ matrix<T> operator*(const matrix<T> &a, const matrix<T> &b)
     return prod;
 }
 
+// prodotto riga per colonna variante trasposta
 template <typename T>
-matrix<T> prod(const matrix<T> &a, const matrix<T> &b)
+matrix<T> prod_transpose(const matrix<T> &a, const matrix<T> &b)
 {
     size_t cols = b.cols();
     matrix<T> prod(a.rows(), cols);
