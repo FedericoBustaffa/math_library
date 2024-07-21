@@ -5,6 +5,10 @@
 namespace lin_alg
 {
 
+std::random_device vector::s_RandomDevice;
+std::mt19937 vector::s_RandomEngine(vector::s_RandomDevice());
+std::uniform_real_distribution<double> vector::s_Distribution;
+
 vector::vector(size_t size) : m_Size(size)
 {
 	m_Vector = new double[size];
@@ -97,6 +101,16 @@ vector vector::operator/(const vector& other) const
 	vector v(m_Size);
 	for (size_t i = 0; i < m_Size; ++i)
 		v[i] = m_Vector[i] / other.m_Vector[i];
+
+	return v;
+}
+
+vector vector::random(size_t size, double min, double max)
+{
+	assert(min < max);
+	vector v(size);
+	for (size_t i = 0; i < size; i++)
+		v[i] = std::uniform_real_distribution<double>(min, max)(s_RandomEngine);
 
 	return v;
 }

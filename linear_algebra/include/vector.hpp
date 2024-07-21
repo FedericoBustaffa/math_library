@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstddef>
 #include <cstring>
+#include <random>
 
 namespace lin_alg
 {
@@ -18,7 +19,7 @@ public:
 	double* copy() const;
 	inline const double* data() const { return m_Vector; }
 
-	inline double& operator[](size_t i) { return m_Vector[i]; }
+	inline double& operator[](size_t i) const { return m_Vector[i]; }
 
 	vector operator+(double scalar) const;
 	vector operator-(double scalar) const;
@@ -31,6 +32,14 @@ public:
 	vector operator/(const vector& other) const;
 
 	~vector();
+
+public:
+	static vector random(size_t size, double min, double max);
+
+private:
+	static std::random_device s_RandomDevice;
+	static std::mt19937 s_RandomEngine;
+	static std::uniform_real_distribution<double> s_Distribution;
 
 private:
 	size_t m_Size;
