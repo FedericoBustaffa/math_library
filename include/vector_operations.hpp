@@ -3,10 +3,11 @@
 
 #include "vector.hpp"
 
-namespace lin_alg
+namespace linalg
 {
 
-double dot(const vector& v1, const vector& v2)
+template <size_t ndim>
+double dot(const vector<ndim>& v1, const vector<ndim>& v2)
 {
 	double res = 0;
 
@@ -16,8 +17,6 @@ double dot(const vector& v1, const vector& v2)
 	return res;
 }
 
-vector cross(const vector& v1, const vector& v2) { return vector(1); }
-
-} // namespace lin_alg
+} // namespace linalg
 
 #endif

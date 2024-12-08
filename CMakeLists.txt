@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
-project(math_library)
+project(linear_algebra)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+file(GLOB_RECURSE HEADERS "include/*.hpp")
+file(GLOB_RECURSE SOURCES "src/*.cpp")
 
-add_subdirectory(linear_algebra)
+add_executable(test ${HEADERS} ${SOURCES})
+target_include_directories(test PRIVATE "include/")

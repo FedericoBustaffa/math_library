@@ -1,14 +1,14 @@
 #include <iostream>
 
-#include "vector.hpp"
+#include "vector_impl.hpp"
 #include "vector_operations.hpp"
 
-namespace la = lin_alg;
+namespace la = linalg;
 
 int main(int argc, const char** argv)
 {
-	la::vector v1 = la::vector::random(5, 0, 1);
-	la::vector v2 = la::vector::random(5, 0, 1);
+	la::vector<3> v1;
+	la::vector<3> v2;
 
 	std::cout << v1 << std::endl;
 	std::cout << v2 << std::endl;
