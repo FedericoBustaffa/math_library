@@ -1,7 +1,7 @@
 #ifndef OPERATIONS
 #define OPERATIONS
 
-#include "linalg.hpp"
+#include "vector/vector.hpp"
 
 #include <cmath>
 #include <cassert>

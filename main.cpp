@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "include/linalg.hpp"
+#include "linalg.hpp"
 
 namespace la = linalg;
 

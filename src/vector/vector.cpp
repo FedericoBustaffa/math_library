@@ -1,4 +1,4 @@
-#include "../../include/vector/vector.hpp"
+#include "vector/vector.hpp"
 
 #include <cstring>
 
