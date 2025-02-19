@@ -38,11 +38,13 @@ private:
 
 double dot(const vector& v1, const vector& v2);
 
+vector cross(const vector& v1, const vector& v2);
+
 double norm2(const vector& v);
 
 } // namespace linalg
 
-inline std::ostream& operator<<(std::ostream& os, linalg::vector& v)
+inline std::ostream& operator<<(std::ostream& os, linalg::vector v)
 {
 	os << "[ ";
 	for (size_t i = 0; i < v.dim(); ++i)
