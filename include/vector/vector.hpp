@@ -2,25 +2,22 @@
 #define VECTOR_HPP
 
 #include <iostream>
-#include <cstddef>
-#include <cstring>
-#include <random>
 
 namespace linalg
 {
 
-template <size_t ndim>
 class vector
 {
 public:
-	vector();
+	vector(size_t dim);
 	vector(const vector& other);
 
-	inline size_t size() const { return ndim; }
-	double* copy() const;
-	inline const double* data() const { return m_Vector; }
+	inline size_t dim() const { return m_Dim; }
+	inline size_t size() const { return m_Dim * sizeof(double); }
+	inline vector copy() const { return vector(*this); };
+	inline const double* data() const { return m_Buffer; }
 
-	inline double& operator[](size_t i) const { return m_Vector[i]; }
+	inline double& operator[](size_t i) const { return m_Buffer[i]; }
 
 	vector operator+(double scalar) const;
 	vector operator-(double scalar) const;
@@ -35,18 +32,22 @@ public:
 	~vector();
 
 private:
-	double* m_Vector;
+	double* m_Buffer;
+	size_t m_Dim;
 };
+
+double dot(const vector& v1, const vector& v2);
+
+double norm2(const vector& v);
 
 } // namespace linalg
 
-template <size_t ndim>
-inline std::ostream& operator<<(std::ostream& os, linalg::vector<ndim>& v)
+inline std::ostream& operator<<(std::ostream& os, linalg::vector& v)
 {
 	os << "[ ";
-	for (size_t i = 0; i < v.size(); ++i)
+	for (size_t i = 0; i < v.dim(); ++i)
 	{
-		if (i < v.size() - 1)
+		if (i < v.dim() - 1)
 			os << v[i] << ", ";
 		else
 			os << v[i];
