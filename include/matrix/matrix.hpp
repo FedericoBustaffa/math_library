@@ -13,17 +13,12 @@ public:
 	matrix(size_t rows, size_t cols);
 	matrix(size_t dim);
 	matrix(const matrix& other);
-	void operator=(const matrix& other);
 
 	// utility
 	inline size_t rows() const { return m_Rows; }
 	inline size_t cols() const { return m_Cols; }
-	inline size_t size() const { return m_Rows * m_Cols; }
-
-	inline std::pair<size_t, size_t> shape() const
-	{
-		return std::pair<size_t, size_t>(m_Rows, m_Cols);
-	}
+	inline size_t dim() const { return m_Rows * m_Cols; }
+	std::pair<size_t, size_t> shape() const;
 
 	// accesso elementi
 	double& operator()(size_t i, size_t j) { return m_Matrix[i * m_Cols + j]; }
@@ -40,5 +35,7 @@ private:
 } // namespace linalg
 
 std::ostream& operator<<(std::ostream& os, linalg::matrix m);
+
+std::ostream& operator<<(std::ostream& os, std::pair<size_t, size_t> shape);
 
 #endif

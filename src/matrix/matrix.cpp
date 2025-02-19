@@ -1,6 +1,7 @@
 #include "matrix/matrix.hpp"
 
 #include <iostream>
+#include <utility>
 
 namespace linalg
 {
@@ -21,12 +22,9 @@ matrix::matrix(const matrix& other) : m_Rows(other.rows()), m_Cols(other.cols())
 		m_Matrix[i] = other.m_Matrix[i];
 }
 
-void matrix::operator=(const matrix& other)
+std::pair<size_t, size_t> matrix::shape() const
 {
-	m_Rows = other.rows();
-	m_Cols = other.cols();
-	for (size_t i = 0; i < m_Rows * m_Cols; ++i)
-		m_Matrix[i] = other.m_Matrix[i];
+	return std::pair<size_t, size_t>(m_Rows, m_Cols);
 }
 
 matrix::~matrix() { delete[] m_Matrix; }
@@ -39,8 +37,16 @@ std::ostream& operator<<(std::ostream& os, linalg::matrix m)
 	{
 		for (size_t j = 0; j < m.cols(); ++j)
 			os << std::left << m(i, j) << " " << std::flush;
-		os << std::endl;
+
+		if (i < m.rows() - 1)
+			os << std::endl;
 	}
 
+	return os;
+}
+
+std::ostream& operator<<(std::ostream& os, std::pair<size_t, size_t> shape)
+{
+	os << "(" << shape.first << ", " << shape.second << ")";
 	return os;
 }
