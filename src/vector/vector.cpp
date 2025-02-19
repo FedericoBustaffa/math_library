@@ -1,4 +1,4 @@
-#include "linalg.hpp"
+#include "../../include/vector/vector.hpp"
 
 #include <cstring>
 
@@ -94,3 +94,19 @@ vector vector::operator/(const vector& other) const
 vector::~vector() { delete[] m_Buffer; }
 
 } // namespace linalg
+
+std::ostream& operator<<(std::ostream& os, linalg::vector v)
+{
+	os << "[ ";
+	for (size_t i = 0; i < v.dim(); ++i)
+	{
+		if (i < v.dim() - 1)
+			os << v[i] << ", ";
+		else
+			os << v[i];
+	}
+
+	os << " ]";
+
+	return os;
+}

@@ -44,20 +44,6 @@ double norm2(const vector& v);
 
 } // namespace linalg
 
-inline std::ostream& operator<<(std::ostream& os, linalg::vector v)
-{
-	os << "[ ";
-	for (size_t i = 0; i < v.dim(); ++i)
-	{
-		if (i < v.dim() - 1)
-			os << v[i] << ", ";
-		else
-			os << v[i];
-	}
-
-	os << " ]";
-
-	return os;
-}
+std::ostream& operator<<(std::ostream& os, linalg::vector v);
 
 #endif
