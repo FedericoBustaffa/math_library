@@ -9,6 +9,12 @@ namespace la = linalg;
 
 int main(int argc, const char** argv)
 {
+	if (argc < 2)
+	{
+		std::cerr << "Usage: " << argv[0] << " <dim>" << std::endl;
+		return 1;
+	}
+
 	size_t dim = (size_t)std::atoi(argv[1]);
 	la::matrix a(dim);
 	la::matrix b(dim);
