@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include "linalg.hpp"
 
@@ -6,15 +7,23 @@ namespace la = linalg;
 
 int main(int argc, const char** argv)
 {
-	la::matrix m(5);
-	for (size_t i = 0; i < m.rows(); ++i)
+	size_t dim = (size_t)std::atoi(argv[1]);
+	la::matrix a(dim);
+	la::matrix b(dim);
+	for (size_t i = 0; i < a.rows(); ++i)
 	{
-		for (size_t j = 0; j < m.cols(); ++j)
-			m(i, j) = i * m.cols() + j;
+		for (size_t j = 0; j < a.cols(); ++j)
+		{
+			a(i, j) = i * a.cols() + j / 10;
+			b(i, j) = i * a.cols() + j * 2;
+		}
 	}
-	std::cout << m << std::endl;
-	std::cout << std::endl;
-	std::cout << la::transpose(m) << std::endl;
+
+	auto start = std::chrono::high_resolution_clock::now();
+	la::matrix p = la::dot(a, b);
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> d = end - start;
+	std::cout << d.count() << std::endl;
 
 	return 0;
 }

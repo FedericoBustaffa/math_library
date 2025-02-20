@@ -20,9 +20,19 @@ public:
 	inline size_t dim() const { return m_Rows * m_Cols; }
 	std::pair<size_t, size_t> shape() const;
 
-	// accesso elementi
+	// access elements
 	double& operator()(size_t i, size_t j) { return m_Matrix[i * m_Cols + j]; }
 	const double& operator()(size_t i, size_t j) const { return m_Matrix[i * m_Cols + j]; }
+
+	matrix operator+(double scalar) const;
+	matrix operator-(double scalar) const;
+	matrix operator*(double scalar) const;
+	matrix operator/(double scalar) const;
+
+	matrix operator+(const matrix& other) const;
+	matrix operator-(const matrix& other) const;
+	matrix operator*(const matrix& other) const;
+	matrix operator/(const matrix& other) const;
 
 	~matrix();
 

@@ -27,20 +27,122 @@ std::pair<size_t, size_t> matrix::shape() const
 	return std::pair<size_t, size_t>(m_Rows, m_Cols);
 }
 
+matrix matrix::operator+(double scalar) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] + scalar;
+	}
+
+	return m;
+}
+
+matrix matrix::operator-(double scalar) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] - scalar;
+	}
+
+	return m;
+}
+
+matrix matrix::operator*(double scalar) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] * scalar;
+	}
+
+	return m;
+}
+
+matrix matrix::operator/(double scalar) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] / scalar;
+	}
+
+	return m;
+}
+
+matrix matrix::operator+(const matrix& other) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] + other(i, j);
+	}
+
+	return m;
+}
+
+matrix matrix::operator-(const matrix& other) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] - other(i, j);
+	}
+
+	return m;
+}
+
+matrix matrix::operator*(const matrix& other) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] * other(i, j);
+	}
+
+	return m;
+}
+
+matrix matrix::operator/(const matrix& other) const
+{
+	matrix m(m_Rows, m_Cols);
+	for (size_t i = 0; i < m_Rows; ++i)
+	{
+		for (size_t j = 0; j < m_Cols; ++j)
+			m(i, j) = m_Matrix[i * m_Cols + j] / other(i, j);
+	}
+
+	return m;
+}
+
 matrix::~matrix() { delete[] m_Matrix; }
 
 } // namespace linalg
 
 std::ostream& operator<<(std::ostream& os, linalg::matrix m)
 {
+	// os << "[";
 	for (size_t i = 0; i < m.rows(); ++i)
 	{
 		for (size_t j = 0; j < m.cols(); ++j)
-			os << std::left << m(i, j) << " " << std::flush;
+		{
+			os << std::left << m(i, j);
+			if (j < m.cols() - 1)
+				os << " " << std::flush;
+		}
 
 		if (i < m.rows() - 1)
 			os << std::endl;
 	}
+	// os << "]";
 
 	return os;
 }

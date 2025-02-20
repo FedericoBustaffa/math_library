@@ -8,6 +8,8 @@ namespace linalg
 
 matrix transpose(const matrix& m);
 
+matrix dot(const matrix& a, const matrix& b);
+
 } // namespace linalg
 
 #endif
