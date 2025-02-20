@@ -13,8 +13,8 @@ set(CMAKE_CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-file(GLOB_RECURSE HEADERS "include/**.hpp")
-file(GLOB_RECURSE SOURCES "src/**.cpp")
+file(GLOB_RECURSE HEADERS "include/*.hpp")
+file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 add_library(linalg ${HEADERS} ${SOURCES})
 target_include_directories(linalg PRIVATE "include/")

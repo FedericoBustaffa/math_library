@@ -14,7 +14,7 @@ int main(int argc, const char** argv)
 	{
 		for (size_t j = 0; j < a.cols(); ++j)
 		{
-			a(i, j) = i * a.cols() + j / 10;
+			a(i, j) = i * a.cols() + j;
 			b(i, j) = i * a.cols() + j * 2;
 		}
 	}
