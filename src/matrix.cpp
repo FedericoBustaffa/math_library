@@ -1,6 +1,8 @@
 #include "matrix.hpp"
 
+#include <algorithm>
 #include <iostream>
+#include <memory>
 #include <utility>
 
 namespace linalg
@@ -9,17 +11,23 @@ namespace linalg
 matrix::matrix(size_t rows, size_t cols) : m_Rows(rows), m_Cols(cols)
 {
 	m_Matrix = new double[rows * cols];
-	for (size_t i = 0; i < rows * cols; ++i)
-		m_Matrix[i] = 0;
+	std::fill(m_Matrix, m_Matrix + m_Rows * m_Cols, 0);
 }
 
 matrix::matrix(size_t dim) : matrix(dim, dim) {}
 
-matrix::matrix(const matrix& other) : m_Rows(other.rows()), m_Cols(other.cols())
+matrix::matrix(const matrix& other) : m_Rows(other.m_Rows), m_Cols(other.m_Cols)
 {
 	m_Matrix = new double[m_Rows * m_Cols];
-	for (size_t i = 0; i < m_Rows * m_Cols; ++i)
-		m_Matrix[i] = other.m_Matrix[i];
+	std::copy(other.m_Matrix, other.m_Matrix + m_Rows * m_Cols, m_Matrix);
+}
+
+matrix::matrix(matrix&& other) noexcept
+	: m_Rows(other.m_Rows), m_Cols(other.m_Cols), m_Matrix(other.m_Matrix)
+{
+	other.m_Rows = 0;
+	other.m_Cols = 0;
+	other.m_Matrix = nullptr;
 }
 
 std::pair<size_t, size_t> matrix::shape() const
@@ -127,7 +135,7 @@ matrix::~matrix() { delete[] m_Matrix; }
 
 } // namespace linalg
 
-std::ostream& operator<<(std::ostream& os, linalg::matrix m)
+std::ostream& operator<<(std::ostream& os, const linalg::matrix& m)
 {
 	// os << "[";
 	for (size_t i = 0; i < m.rows(); ++i)
@@ -147,7 +155,7 @@ std::ostream& operator<<(std::ostream& os, linalg::matrix m)
 	return os;
 }
 
-std::ostream& operator<<(std::ostream& os, std::pair<size_t, size_t> shape)
+std::ostream& operator<<(std::ostream& os, const std::pair<size_t, size_t>& shape)
 {
 	os << "(" << shape.first << ", " << shape.second << ")";
 	return os;

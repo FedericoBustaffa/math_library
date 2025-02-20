@@ -11,6 +11,7 @@ class vector
 public:
 	vector(size_t dim);
 	vector(const vector& other);
+	vector(vector&& other) noexcept; // move constructor
 
 	inline size_t dim() const { return m_Dim; }
 	inline size_t size() const { return m_Dim * sizeof(double); }
@@ -32,12 +33,12 @@ public:
 	~vector();
 
 private:
-	double* m_Buffer;
 	size_t m_Dim;
+	double* m_Buffer;
 };
 
 } // namespace linalg
 
-std::ostream& operator<<(std::ostream& os, linalg::vector v);
+std::ostream& operator<<(std::ostream& os, const linalg::vector& v);
 
 #endif

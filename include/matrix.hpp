@@ -13,6 +13,7 @@ public:
 	matrix(size_t rows, size_t cols);
 	matrix(size_t dim);
 	matrix(const matrix& other);
+	matrix(matrix&& other) noexcept;
 
 	// utility
 	inline size_t rows() const { return m_Rows; }
@@ -44,8 +45,8 @@ private:
 
 } // namespace linalg
 
-std::ostream& operator<<(std::ostream& os, linalg::matrix m);
+std::ostream& operator<<(std::ostream& os, const linalg::matrix& m);
 
-std::ostream& operator<<(std::ostream& os, std::pair<size_t, size_t> shape);
+std::ostream& operator<<(std::ostream& os, const std::pair<size_t, size_t>& shape);
 
 #endif

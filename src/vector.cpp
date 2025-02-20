@@ -1,22 +1,26 @@
 #include "vector.hpp"
 
-#include <cstring>
+#include <memory>
 
 namespace linalg
 {
 
-vector::vector(const size_t dim)
+vector::vector(const size_t dim) : m_Dim(dim)
 {
 	m_Buffer = new double[dim];
-	std::memset(m_Buffer, 0, dim * sizeof(double));
-	m_Dim = dim;
+	std::fill(m_Buffer, m_Buffer + m_Dim, 0);
 }
 
-vector::vector(const vector& other)
+vector::vector(const vector& other) : m_Dim(other.m_Dim)
 {
-	m_Buffer = new double[other.dim()];
-	std::memcpy(m_Buffer, other.m_Buffer, other.m_Dim * sizeof(double));
-	m_Dim = other.m_Dim;
+	m_Buffer = new double[other.m_Dim];
+	std::copy(other.m_Buffer, other.m_Buffer + other.m_Dim, m_Buffer);
+}
+
+vector::vector(vector&& other) noexcept : m_Dim(other.m_Dim), m_Buffer(other.m_Buffer)
+{
+	other.m_Dim = 0;
+	other.m_Buffer = nullptr;
 }
 
 vector vector::operator+(double scalar) const
@@ -95,7 +99,7 @@ vector::~vector() { delete[] m_Buffer; }
 
 } // namespace linalg
 
-std::ostream& operator<<(std::ostream& os, linalg::vector v)
+std::ostream& operator<<(std::ostream& os, const linalg::vector& v)
 {
 	os << "[ ";
 	for (size_t i = 0; i < v.dim(); ++i)
