@@ -31,7 +31,7 @@ int main(int argc, const char** argv)
 	la::matrix p = la::dot(a, b);
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> d = end - start;
-	std::cout << d.count() << std::endl;
+	std::cout << "matrix multiplication: " << d.count() << " seconds" << std::endl;
 
 	la::vector v1(3);
 	v1[0] = 1;
