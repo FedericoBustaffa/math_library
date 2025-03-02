@@ -1,18 +1,21 @@
 #!/bin/bash
 
 
-if [ $# -eq 0 ]; then
-	bt=Debug
-else
-	bt=$1
+if [ $# -lt 1 ]; then
+	echo "USAGE: ./run.sh <BUILD_TYPE>"
+	exit 1
+fi
+
+if [[ ! -d "build" ]]; then
+	mkdir "build"
 fi
 
 cd ./build/
-cmake .. -DCMAKE_BUILD_TYPE=$bt
+cmake .. -DCMAKE_BUILD_TYPE=$1
 
 if make; then
 	cd ..
-	if [ $bt == "Debug" ]; then
+	if [ $1 == "Debug" ]; then
 		valgrind -s --tool=cachegrind ./build/test $2
 	else
 		./build/test $2
