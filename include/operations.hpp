@@ -1,8 +1,8 @@
 #ifndef OPERATIONS_HPP
 #define OPERATIONS_HPP
 
-#include "vector.hpp"
 #include "matrix.hpp"
+#include "vector.hpp"
 
 namespace linalg
 {
